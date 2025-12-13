@@ -1,3 +1,4 @@
+#!/opt/bitcoind-dca/venv/bin/python
 import argparse
 import logging
 import requests
@@ -6,14 +7,14 @@ import hashlib
 import time
 import os
 import dotenv
+import sys
 from datetime import datetime
 from urllib.parse import urlencode
 
 ORDER_ENDPOINT="/api/v3/order"
 USER_INFO_ENDPOINT="/api/v3/account"
 ENV_KEYS_FILE="/etc/default/btcdca/secrets"
-CURRENT_URL= "https://api.binance.com" 
-#CURRENT_URL="https://testnet.binance.vision/api" -> TESTNET
+CURRENT_URL= "https://api.binance.com" # "https://testnet.binance.vision/api"
 SECRET_KEY=None
 API_KEY=None
 
@@ -30,7 +31,7 @@ def configure_arguments():
     parser.add_argument(
         '-A','--amount',
         help="The amount of USDT",
-        type=int,
+        type=float,
         required=True
     )
 
@@ -119,11 +120,13 @@ if __name__ == '__main__':
     dotenv.load_dotenv(ENV_KEYS_FILE)
     SECRET_KEY=os.getenv("SECRET_KEY").replace("\"","")
     API_KEY=os.getenv("API_KEY").replace("\"","")
-    
+
     argument = configure_arguments()
+    amount = argument.amount
+    
+    if amount < 0:
+        logging.error(f"Invalid amount parameter : {amount}")
+        sys.exit(1)
     
     post_dca(argument.amount)
-    
-    # To do : Add telegram bot message after every buy
-    
 

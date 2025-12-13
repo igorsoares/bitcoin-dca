@@ -1,4 +1,4 @@
-# Execute as sudo
+#!/opt/bitcoind-dca/venv/bin/python
 from setup.domain.every_month_cron import EveryMonth
 from setup.config.crontab import create_crontab
 from setup.config.files_and_keys import *
@@ -40,7 +40,14 @@ def menu():
         if option == 0:
             return
         
-        create_crontab(menu_actions[option]())
+        amount = float(input("Amount in USD: "))
+
+        if amount < 0:
+            raise Exception("Invalid amount value")
+
+        cron_expression = menu_actions[option]()
+
+        create_crontab(cron_expression, amount)
     except Exception as e:
         print(f"Goodbye. {e}")
 
