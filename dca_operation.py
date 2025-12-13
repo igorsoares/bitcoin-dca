@@ -119,6 +119,7 @@ if __name__ == '__main__':
     dotenv.load_dotenv(ENV_KEYS_FILE)
     SECRET_KEY=os.getenv("SECRET_KEY").replace("\"","")
     API_KEY=os.getenv("API_KEY").replace("\"","")
+    
     argument = configure_arguments()
     
     post_dca(argument.amount)
