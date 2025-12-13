@@ -33,3 +33,10 @@ sudo ./setup.sh
 
 <img width="935" height="461" alt="Imagem colada" src="https://github.com/user-attachments/assets/00ab08a4-a437-49eb-96d8-4a526eb8f5ef" />
 
+
+# How to uninstall
+
+```
+chmod +x ./uninstall.sh && sudo ./uninstall.sh
+```
+

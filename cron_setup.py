@@ -1,5 +1,6 @@
 #!/opt/bitcoind-dca/venv/bin/python
 from setup.domain.every_month_cron import EveryMonth
+from setup.domain.every_week_day_cron import EveryWeekDay
 from setup.config.crontab import create_crontab
 from setup.config.files_and_keys import *
 import sys
@@ -21,13 +22,15 @@ def monthly_build():
     return every_month.build()
 
 def weekly_buy():
-    print("Weekly buy")
+    every_week_day = EveryWeekDay()
+    return every_week_day.build()
 
 def menu():
     print(banner())
 
     menu_actions = {
-        1: monthly_build
+        1: monthly_build,
+        2: weekly_buy
     }
     
     print("""
