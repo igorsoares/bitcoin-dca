@@ -1,10 +1,17 @@
+<div align="center">
+
+[![Python](https://img.shields.io/badge/Python-3.14.2-blue)]([https://www.oracle.com/java/](https://www.python.org/downloads/release/python-3142/))
+[![Shell Script](https://img.shields.io/badge/Shell%20Script-green)]()
+
+</div>
+
 # bitcoin-dca
-Bitcoin DCA via Binance API
+Bitcoin Dollar Cost Averaging script
 
 # Requirements
-- Python3
+- Python 3.14.2
 - Linux environment
-- Cron service (apt install cron)
+- Cron service
 
 If you're on a Debian / Ubuntu based: 
 
