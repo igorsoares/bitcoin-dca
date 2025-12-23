@@ -36,7 +36,7 @@ def menu():
     print("""
         1. Configure monthly buy
         2. Configure weekly buy
-        0. Exit       
+        0. Exit
     """)
     try:
         option = int(input("Select: "))
