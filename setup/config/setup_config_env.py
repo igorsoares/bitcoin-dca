@@ -6,7 +6,7 @@ class SetupConfig:
     DCA_OPERATION_SCRIPT_NAME="dca_operation.py"
     ETC_SECRETS_DIR = "/etc/default/btcdca/"
     LOG_DIR = "/var/log/bitcoindca/"
-    SECRET_FILE_PERMISSION=600
+    SECRET_FILE_PERMISSION=0o600
 
     # Crontab file path
     CRONTAB_FILE = "/etc/cron.d/bitcoin"

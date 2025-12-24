@@ -21,5 +21,3 @@ sudo "$VENV_PATH/bin/python" ./cron_setup.py || {
 }
 
 echo "[INFO] Setup completed successfully.";
-
-return 0;

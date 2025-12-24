@@ -8,9 +8,9 @@ def create_crontab(cron:str, amount:float):
         full_expression = f'{cron} root /usr/local/bin/dca_operation.py --amount {amount}'
         with open(SetupConfig.CRONTAB_FILE, 'w') as cronfile:
             cronfile.write(f'{full_expression}\n')
-        logging.info("Crontab file created successfully.")
+        print("Crontab file created successfully.")
     except Exception as e:
-        logging.error("Failed to write to cron file configuration")
+        print("Failed to write to cron file configuration")
         raise e
     
 
