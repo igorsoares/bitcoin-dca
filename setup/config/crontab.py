@@ -1,13 +1,12 @@
-from pathlib import Path
-from ..domain.cron import Cron
+import logging
+from .setup_config_env import SetupConfig
 
-CRONTAB_FILE = "/etc/cron.d/bitcoin"
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# For now, only one crontab file per configuration
 def create_crontab(cron:str, amount:float):
     try:
-        full_expression = f'{cron} root sudo /usr/local/bin/dca_operation.py --amount {amount}'
-        with open(CRONTAB_FILE, 'w') as cronfile:
+        full_expression = f'{cron} root /usr/local/bin/dca_operation.py --amount {amount}'
+        with open(SetupConfig.CRONTAB_FILE, 'w') as cronfile:
             cronfile.write(f'{full_expression}\n')
         print("Crontab file created successfully.")
     except Exception as e:

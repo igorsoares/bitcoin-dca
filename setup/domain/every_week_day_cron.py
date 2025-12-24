@@ -6,4 +6,4 @@ class EveryWeekDay(Cron):
         self.set_week_day()
         self.set_hour()
         self.set_minute()
-        return self._build_expression()
+        return self.build_expression()

@@ -14,7 +14,7 @@ from urllib.parse import urlencode
 ORDER_ENDPOINT="/api/v3/order"
 USER_INFO_ENDPOINT="/api/v3/account"
 ENV_KEYS_FILE="/etc/default/btcdca/secrets"
-CURRENT_URL= "https://api.binance.com" # "https://testnet.binance.vision/api"
+CURRENT_URL= "https://api.binance.com"
 SECRET_KEY=None
 API_KEY=None
 
@@ -46,26 +46,26 @@ def create_hmac_signature(parameters):
     
 
 def post_dca(amount):
+    full_url=f'{CURRENT_URL}{ORDER_ENDPOINT}'
 
-    paramsConfig = {
+    params_config = {
         "side":"BUY",
         "symbol":"BTCUSDT",
         "type":"MARKET",
         "quoteOrderQty":amount,
         "timestamp":int(time.time() * 1000)
     }
-    full_url=f'{CURRENT_URL}{ORDER_ENDPOINT}'
+    
 
     headers={
         "X-MBX-APIKEY":API_KEY,
     }
 
-    paramsConfig['signature'] = create_hmac_signature(paramsConfig)
+    params_config['signature'] = create_hmac_signature(params_config)
 
-
-    logging.info(f"Sending {full_url} as {paramsConfig['side']} post request")
+    logging.info(f"Sending {full_url} as {params_config['side']} post request")
     
-    req = requests.post(full_url, headers=headers, params = paramsConfig)
+    req = requests.post(full_url, headers=headers, params = params_config)
 
     if(req.status_code == 200):
         resp_as_json = req.json()
