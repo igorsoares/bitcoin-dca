@@ -46,11 +46,9 @@ This script was built primarily to run on a Linux-based system alongside the cro
 Below are the upcoming planned features:
 
 - **Implement a Telegram bot**: This bot will notify the user of the current operation status when the script runs.
-- **Update the API authorization method**: Migrate from HMAC (current method) to RSA encryption, which provides a more secure communication mechanism.
+- **Update the API authentication method**: Migrate from HMAC (current method) to __Ed25519__ , which provides a more secure communication mechanism.
 
 It's possible to track this roadmap in the `issues` tab.
-
-
 
 # Installation
 
@@ -95,9 +93,6 @@ chmod +x ./setup.sh
 sudo ./setup.sh
 ```
 
-<img width="935" height="461" alt="Imagem colada" src="https://github.com/user-attachments/assets/00ab08a4-a437-49eb-96d8-4a526eb8f5ef" />
-
-
 # How to uninstall
 
 ```
@@ -106,9 +101,18 @@ chmod +x ./uninstall.sh && sudo ./uninstall.sh
 
 # Contribute
 
-If you wish to contribute to this script you're more than welcome. 
+If you wish to contribute to this script, you're more than welcome. 
 
-Before you start it's mandatory to you understand how the structure is working in this project.
+Before you start it is __mandatory__ that you understand how the project structure works.
+
+Below are the main directories and files you must be familiar with:
+
+- `/etc/cron.d/`: Directory repsonsible for storing all schedules jobs.
+- `/var/log/bitcoindca/`: Directory responsible for storing execution logs of this script, including all operations and their statuses.
+- `/etc/default/btcdca/`: Directory responsible for storing the Binance API secrets.
+    - __The secret file is stored with `600` permissions and is acessible only by the root user.__
+- `/usr/local/bin/dca_operation.py`: File responsible executing the buy order itself.
+    - It receives an argument (--amount or -A) passed from the cron configuration files located in `/etc/cron.d/`
 
 
 

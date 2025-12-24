@@ -6,7 +6,7 @@ from setup.config.files_and_keys import *
 import sys
 
 def banner():
-    return """
+    print("""
 
 ██████╗ ██╗████████╗ ██████╗ ██████╗ ██╗███╗   ██╗    ██████╗  ██████╗ █████╗ 
 ██╔══██╗██║╚══██╔══╝██╔════╝██╔═══██╗██║████╗  ██║    ██╔══██╗██╔════╝██╔══██╗
@@ -14,7 +14,7 @@ def banner():
 ██╔══██╗██║   ██║   ██║     ██║   ██║██║██║╚██╗██║    ██║  ██║██║     ██╔══██║
 ██████╔╝██║   ██║   ╚██████╗╚██████╔╝██║██║ ╚████║    ██████╔╝╚██████╗██║  ██║
 ╚═════╝ ╚═╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝    ╚═════╝  ╚═════╝╚═╝  ╚═╝
-"""
+""")
 
 
 def monthly_build():
@@ -26,7 +26,7 @@ def weekly_buy():
     return every_week_day.build()
 
 def menu():
-    print(banner())
+    banner()
 
     menu_actions = {
         1: monthly_build,
@@ -39,7 +39,7 @@ def menu():
         0. Exit
     """)
     try:
-        option = int(input("Select: "))
+        option = int(input("[BTC] Select: "))
         if option == 0:
             return
         
@@ -48,9 +48,9 @@ def menu():
         if amount < 0:
             raise Exception("Invalid amount value")
 
-        cron_expression = menu_actions[option]()
+        chose_action = menu_actions[option]
 
-        create_crontab(cron_expression, amount)
+        create_crontab(chose_action(), amount)
     except Exception as e:
         print(f"Goodbye. {e}")
 
@@ -59,7 +59,7 @@ def menu():
 if __name__ == '__main__':
     try:
         if os.geteuid() != 0:
-            print("This script must be run as root or with sudo.")
+            print("This script must be run as sudo.")
             sys.exit(1)
         setup_files()
         menu()

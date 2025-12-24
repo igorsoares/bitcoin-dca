@@ -1,3 +1,22 @@
+"""
+A cron job is a time-based scheduler in Unix-like operating systems, such as Linux and macOS. 
+It automates repetitive tasks like backups, system maintenance, and script execution.
+
+It has the following structure:
+* * * * *
+| | | | | 
+| | | | Weekday (0-6)
+| | | Month
+| | Day
+| Hour
+Minute 
+
+Examples:
+
+45 4 * * *  -> "At 04:45" 
+0 9 24 12 * -> "At 09:00 on day-of-month 24 in December."
+
+"""
 class Cron:
 
     def __init__(self):
@@ -32,7 +51,7 @@ class Cron:
     def set_week_day(self):
         self.weekday = self.set_int_value("Weekday (0-6). 0 being Sunday: ", 0, 6)
 
-    def _build_expression(self):
+    def build_expression(self):
         return f'{self.minute} {self.hour} {self.day} {self.month} {self.weekday}'
         
             
