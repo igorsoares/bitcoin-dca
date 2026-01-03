@@ -1,0 +1,9 @@
+binance:
+  base_url: https://api.binance.com
+  endpoints:
+    order: /api/v3/order
+    account: /api/v3/account
+
+
+config:
+  secrets: /etc/default/btcdca/secrets

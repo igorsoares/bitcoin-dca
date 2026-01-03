@@ -36,7 +36,7 @@ def _create_log_directory():
 def _copy_main_dca_script():
     logging.info("Copying DCA script to /usr/local/bin")
     full_path = os.path.join('/usr/local/bin', SetupConfig.DCA_OPERATION_SCRIPT_NAME)
-    subprocess.run(["cp","./dca_operation.py",full_path],check=True)
+    subprocess.run(["cp","schedule/dca_operation.py",full_path],check=True)
 
 def setup_files():
     _api_keys_setup()
