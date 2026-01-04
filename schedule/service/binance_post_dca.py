@@ -51,9 +51,7 @@ class BinancePostDca(PostDcaProvider):
         return payload
 
     # TODO Replace float
-    def post(self, amount, signature: SignatureProvider, symbol="BTCUSDT"):
-        
-        
+    def post(self, amount, signature: SignatureProvider, secrets, symbol="BTCUSDT"):
         exchange_settings: ExchangeSettings = BinanceSettings()
 
         binance_settings = exchange_settings.settings()
@@ -64,26 +62,33 @@ class BinancePostDca(PostDcaProvider):
 
         payload = self.post_build_payload(symbol, amount, signature)
 
+        headers = {
+            "X-MBX-APIKEY": secrets["api_key"],
+        }
+
         logging.info(f"Sending {full_url} as {payload['side']} post request")
 
-        # req = requests.post(
-        #     full_url
-        #     , headers={
-        #     "X-MBX-APIKEY":API_KEY,
-        #     }
-        #     , params = payload)
+        req = requests.post(
+            full_url,
+            headers=headers,
+            params=payload,
+        )
 
-        # if(req.status_code == 200):
-        #     resp_as_json = req.json()
-        #     symbol = resp_as_json['symbol']
+        if req.status_code == 200:
+            resp_as_json = req.json()
+            symbol = resp_as_json["symbol"]
 
-        #     order_status = resp_as_json['status']
-        #     order_id = resp_as_json['orderId']
+            order_status = resp_as_json["status"]
+            order_id = resp_as_json["orderId"]
 
-        #     logging.info(f"Market order filled at {symbol} successfully with status {order_status} with the order id {order_id}")
-        #     get_user_balance()
-        # else:
-        #     logging.error(f"Failed to post market order : {req.text}")
+            logging.info(
+                f"Market order filled at {symbol} successfully with status {order_status} with the order id {order_id}"
+            )
+
+            # self.get_user_balances()
+
+        else:
+            logging.error(f"Failed to post market order : {req.text}")
 
     def get_user_balances(self):
         user_balance_params = {"timestamp": int(time.time() * 1000)}

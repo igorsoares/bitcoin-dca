@@ -2,12 +2,12 @@ from dotenv import load_dotenv
 from os import getenv
 from pathlib import Path
 from sys import exit
+import configuration.user_environment as user_environment
 import yaml
 
-def load(path:str="settings.yaml"):
+def load():
     try:
-        configs = None
-        with open(Path(path), "r", encoding="utf-8") as file:
+        with open(Path(user_environment.settings_yaml_file), "r", encoding="utf-8") as file:
             configs = yaml.safe_load(file)['config']
         load_dotenv(configs['secrets'])
 

@@ -9,7 +9,9 @@ if __name__ == "__main__":
     arguments = configure_arguments()
     amount = arguments.amount
 
-    binance_post: BinancePostDca = BinancePostDca()
-    hmac_algo: SignatureProvider = HmacSignature(load()["secret_key"])
+    secrets = load()
 
-    binance_post.post(amount, hmac_algo)
+    binance_post: BinancePostDca = BinancePostDca()
+    hmac_algo: SignatureProvider = HmacSignature(secrets["secret_key"])
+
+    binance_post.post(amount, hmac_algo, secrets)
