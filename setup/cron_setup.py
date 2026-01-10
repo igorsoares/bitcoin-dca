@@ -1,8 +1,8 @@
 #!/opt/bitcoind-dca/venv/bin/python
-from setup.domain.every_month_cron import EveryMonth
-from setup.domain.every_week_day_cron import EveryWeekDay
-from setup.config.crontab import create_crontab
-from setup.config.files_and_keys import *
+from domain.every_month_cron import EveryMonth
+from domain.every_week_day_cron import EveryWeekDay
+from config.crontab import create_crontab
+from config.files_and_keys import *
 import sys
 
 def banner():
@@ -52,8 +52,8 @@ def menu():
 
         create_crontab(chose_action(), amount)
     except Exception as e:
-        print(f"Goodbye. {e}")
-
+        print("Invalid input. Goodbye.")
+        sys.exit(1)
 
 
 if __name__ == '__main__':

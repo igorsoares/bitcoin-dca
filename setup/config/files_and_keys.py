@@ -1,19 +1,17 @@
-import subprocess
 import os 
-import logging
+from sys import exit
 from getpass import getpass
 from .setup_config_env import SetupConfig
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def print_colored(message: str, color_code: str = SetupConfig.RESET):
     print(f"{color_code}{message}{SetupConfig.RESET}")
 
+def _clear_console():
+    os.system("clear")
 
 def _api_keys_setup():
     try:
-        print_colored(f"[ALERT] If you don’t have a Binance API key, read: ", SetupConfig.YELLOW)
-        print(SetupConfig.BINANCE_GENERATE_TOKENS_DOC)
+        print_colored(f"[ALERT] If you don’t have a Binance API key, read: {SetupConfig.BINANCE_GENERATE_TOKENS_DOC}", SetupConfig.YELLOW)
 
         secret_key_in = str(getpass("Enter the secret key: "))
         api_key_in = str(getpass("Enter the api key: "))
@@ -26,24 +24,13 @@ def _api_keys_setup():
             secrets_file.write(f"API_KEY={api_key_in}\n")
 
         os.chmod(full_secret_path, SetupConfig.SECRET_FILE_PERMISSION)
-    except Exception as e:
-        raise e
-
-def _create_log_directory():
-    logging.info("Creating log directory")
-    os.makedirs(SetupConfig.LOG_DIR, exist_ok=True)
-
-def _copy_main_dca_script():
-    logging.info("Copying DCA script to /usr/local/bin")
-    full_path = os.path.join('/usr/local/bin', SetupConfig.DCA_OPERATION_SCRIPT_NAME)
-    subprocess.run(["cp","schedule/dca_operation.py",full_path],check=True)
+    except Exception as exception:
+        print("[-] Failed to setup API Keys: ", exception)
+        exit(1)
 
 def setup_files():
+    _clear_console()
     _api_keys_setup()
-
-    _create_log_directory()
-    
-    _copy_main_dca_script()
 
 
 if __name__ == "__main__":

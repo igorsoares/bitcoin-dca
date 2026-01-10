@@ -3,7 +3,7 @@ from sys import exit
 import configuration.user_environment as user_environment
 
 
-def parameters_validation(parser):
+def _parameters_validation(parser):
     amount = parser.amount
 
     if amount < 0:
@@ -33,6 +33,6 @@ def configure_arguments():
 
     args = parser.parse_args()
 
-    parameters_validation(args)
+    _parameters_validation(args)
 
     return args

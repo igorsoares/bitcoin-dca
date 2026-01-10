@@ -1,11 +1,11 @@
-import logging
 from .setup_config_env import SetupConfig
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def create_crontab(cron:str, amount:float):
     try:
-        full_expression = f'{cron} root /usr/local/bin/dca_operation.py --amount {amount}'
+        dca_operation_file=f"{SetupConfig.OPT_DIR}/dca_operation.py"
+        python_venv_bin=f"{SetupConfig.OPT_DIR}/venv/bin/python3"
+
+        full_expression = f'{cron} root {python_venv_bin} {dca_operation_file} --amount {amount}'
         with open(SetupConfig.CRONTAB_FILE, 'w') as cronfile:
             cronfile.write(f'{full_expression}\n')
         print("Crontab file created successfully.")

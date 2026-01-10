@@ -3,8 +3,8 @@ Centralized configurations for initial Setup
 """
 class SetupConfig:
     # Main DCA operation script name and directories
-    DCA_OPERATION_SCRIPT_NAME="dca_operation.py"
-    ETC_SECRETS_DIR = "/etc/default/btcdca/"
+    OPT_DIR="/opt/bitcoindca"
+    ETC_SECRETS_DIR = "/etc/default/bitcoindca/"
     LOG_DIR = "/var/log/bitcoindca/"
     SECRET_FILE_PERMISSION=0o600
 
