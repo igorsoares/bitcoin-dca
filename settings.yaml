@@ -1,9 +1,16 @@
 binance:
+  generate-tokens-doc: https://www.binance.com/en/support/faq/detail/360002502072
   base_url: https://api.binance.com
   endpoints:
     order: /api/v3/order
     account: /api/v3/account
 
-
 config:
-  secrets: /etc/default/btcdca/secrets
+  opt-directory: /opt/bitcoindca
+  logs-directory: /var/log/bitcoindca
+  crontab-file: /etc/cron.d/bitcoin
+  secrets-file: /etc/default/bitcoindca/secrets
+  colors:
+    yellow: "\033[33m"
+    green: "\033[32m"
+    reset: "\033[0m"

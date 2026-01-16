@@ -3,17 +3,19 @@ from domain.every_month_cron import EveryMonth
 from domain.every_week_day_cron import EveryWeekDay
 from config.crontab import create_crontab
 from config.files_and_keys import *
+from config.setup_config_env import SetupConfig
 import sys
 
 def banner():
-    print("""
-
+    print(f"""
+{SetupConfig.GREEN}
 ██████╗ ██╗████████╗ ██████╗ ██████╗ ██╗███╗   ██╗    ██████╗  ██████╗ █████╗ 
 ██╔══██╗██║╚══██╔══╝██╔════╝██╔═══██╗██║████╗  ██║    ██╔══██╗██╔════╝██╔══██╗
 ██████╔╝██║   ██║   ██║     ██║   ██║██║██╔██╗ ██║    ██║  ██║██║     ███████║
 ██╔══██╗██║   ██║   ██║     ██║   ██║██║██║╚██╗██║    ██║  ██║██║     ██╔══██║
 ██████╔╝██║   ██║   ╚██████╗╚██████╔╝██║██║ ╚████║    ██████╔╝╚██████╗██║  ██║
 ╚═════╝ ╚═╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝    ╚═════╝  ╚═════╝╚═╝  ╚═╝
+{SetupConfig.RESET}
 """)
 
 
@@ -34,12 +36,12 @@ def menu():
     }
     
     print("""
-        1. Configure monthly buy
-        2. Configure weekly buy
-        0. Exit
+        [1] Configure monthly buy
+        [2] Configure weekly buy
+        [0] Exit
     """)
     try:
-        option = int(input("[BTC] Select: "))
+        option = int(input("Select: "))
         if option == 0:
             return
         
