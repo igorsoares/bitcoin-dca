@@ -1,10 +1,10 @@
 #!/opt/bitcoind-dca/venv/bin/python
-from configuration.arguments import configure_arguments
-from configuration.load_secrets import load
-from configuration.binance_settings import BinanceSettings
-from service.binance_post_dca import BinancePostDca
-from service.hmac_signature import HmacSignature
-from domain.signature_provider import SignatureProvider
+from schedule.configuration.arguments import configure_arguments
+from schedule.configuration.load_secrets import load
+from schedule.domain.models.binance_settings import BinanceSettings
+from schedule.service.binance_post_dca import BinancePostDca
+from schedule.service.hmac_signature import HmacSignature
+from schedule.domain.interfaces.signature_provider import SignatureProvider
 
 if __name__ == "__main__":
     arguments = configure_arguments()

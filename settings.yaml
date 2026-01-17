@@ -9,8 +9,5 @@ config:
   opt-directory: /opt/bitcoindca
   logs-directory: /var/log/bitcoindca
   crontab-file: /etc/cron.d/bitcoin
+  secrets-directory: /etc/default/bitcoindca
   secrets-file: /etc/default/bitcoindca/secrets
-  colors:
-    yellow: "\033[33m"
-    green: "\033[32m"
-    reset: "\033[0m"

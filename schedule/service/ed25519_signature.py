@@ -1,4 +1,4 @@
-from ..domain.signature_provider import SignatureProvider
+from schedule.domain.interfaces.signature_provider import SignatureProvider
 
 class Ed25519Signature(SignatureProvider):
 

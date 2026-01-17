@@ -1,6 +1,6 @@
 import argparse
 from sys import exit
-import configuration.user_environment as user_environment
+import schedule.configuration.user_environment as user_environment
 
 
 def _parameters_validation(parser):

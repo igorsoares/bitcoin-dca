@@ -4,10 +4,10 @@ import logging
 from decimal import Decimal
 from datetime import datetime
 from urllib.parse import urlencode, urljoin
-from domain.post_dca_provider import PostDcaProvider
-from domain.signature_provider import SignatureProvider
-from configuration.binance_settings import BinanceSettings
-from domain.exchange_settings import ExchangeSettings
+from schedule.domain.interfaces.post_dca_provider import PostDcaProvider
+from schedule.domain.interfaces.signature_provider import SignatureProvider
+from schedule.domain.models.binance_settings import BinanceSettings
+from schedule.domain.interfaces.exchange_settings import ExchangeSettings
 
 # Set the default logging config as buy-YearMonth.log
 logging.basicConfig(

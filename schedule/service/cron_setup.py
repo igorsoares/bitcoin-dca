@@ -1,22 +1,22 @@
 #!/opt/bitcoind-dca/venv/bin/python
-from domain.every_month_cron import EveryMonth
-from domain.every_week_day_cron import EveryWeekDay
-from config.crontab import create_crontab
-from config.files_and_keys import *
-from config.setup_config_env import SetupConfig
+from schedule.domain.models.every_month_cron import EveryMonth
+from schedule.domain.models.every_week_day_cron import EveryWeekDay
+from schedule.configuration.crontab import create_crontab
+from schedule.configuration.files_and_keys import *
+from schedule.common import utils
 import sys
 
+
 def banner():
-    print(f"""
-{SetupConfig.GREEN}
+    banner="""
 ██████╗ ██╗████████╗ ██████╗ ██████╗ ██╗███╗   ██╗    ██████╗  ██████╗ █████╗ 
 ██╔══██╗██║╚══██╔══╝██╔════╝██╔═══██╗██║████╗  ██║    ██╔══██╗██╔════╝██╔══██╗
 ██████╔╝██║   ██║   ██║     ██║   ██║██║██╔██╗ ██║    ██║  ██║██║     ███████║
 ██╔══██╗██║   ██║   ██║     ██║   ██║██║██║╚██╗██║    ██║  ██║██║     ██╔══██║
 ██████╔╝██║   ██║   ╚██████╗╚██████╔╝██║██║ ╚████║    ██████╔╝╚██████╗██║  ██║
 ╚═════╝ ╚═╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝    ╚═════╝  ╚═════╝╚═╝  ╚═╝
-{SetupConfig.RESET}
-""")
+"""
+    utils.print_green(banner)
 
 
 def monthly_build():

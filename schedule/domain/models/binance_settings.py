@@ -1,6 +1,6 @@
-from domain.exchange_settings import ExchangeSettings
+from schedule.domain.interfaces.exchange_settings import ExchangeSettings
 from pathlib import Path
-import configuration.user_environment as user_environment
+import schedule.configuration.user_environment as user_environment
 import yaml
 
 class BinanceSettings(ExchangeSettings):

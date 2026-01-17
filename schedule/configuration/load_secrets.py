@@ -1,14 +1,12 @@
 from dotenv import load_dotenv
 from os import getenv
 from sys import exit
-from config import settings
-import configuration.user_environment as user_environment
-
+from schedule.configuration.setup_config_env import getenvs
 
 def load():
     try:
-        
-        #load_dotenv(SetupConfig.ETC_SECRETS_DIR+"secrets")
+        config = getenvs()
+        load_dotenv(f"{config['config']['secrets-file']}")
 
         return {
             "secret_key": getenv("SECRET_KEY"),

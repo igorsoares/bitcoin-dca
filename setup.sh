@@ -22,14 +22,13 @@ mkdir -p "$LOG_DIR"
 mkdir -p "$SECRETS_DIR"
 
 # Copy all scripts to the /opt
-cp -r setup/ "$OPT_DIR"
 cp -r schedule/ "$OPT_DIR"
 cp requirements.txt "$OPT_DIR"
 cp uninstall.sh "$OPT_DIR"
 cp settings.yaml "$OPT_DIR"
 
 # Create a venv
-sudo python3 -m venv "$VENV_PATH" || {
+python3 -m venv "$VENV_PATH" || {
     echo "[ERROR] Creating venv failed. Fix the issue and try again.";
     exit 1;
 }
@@ -40,8 +39,7 @@ sudo python3 -m venv "$VENV_PATH" || {
     exit 1;
 }
 
-# Run the configuration setup (Monthly, weekly, and the amount to invest)
-sudo "$VENV_PATH/bin/python" "$OPT_DIR/setup/cron_setup.py" || {
+cd "$OPT_DIR" && ./venv/bin/python -m schedule.service.cron_setup || {
     echo "[ERROR] Running cron_setup.py failed. Fix the issue and try again."
     exit 1
 }

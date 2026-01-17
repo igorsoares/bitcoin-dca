@@ -1,7 +1,6 @@
 import hmac
 import hashlib
-from domain.signature_provider import SignatureProvider
-
+from schedule.domain.interfaces.signature_provider import SignatureProvider
 
 class HmacSignature(SignatureProvider):
 
