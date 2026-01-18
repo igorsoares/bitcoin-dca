@@ -16,6 +16,7 @@
 [Contribute](#contribute)
 </div>
 
+<img width="1616" height="856" alt="image" src="https://github.com/user-attachments/assets/76f59e00-ae6e-4780-a693-20d0fdc5d884" />
 
 
 # bitcoin-dca
@@ -109,10 +110,7 @@ Below are the main directories and files you must be familiar with:
 
 - `/etc/cron.d/`: Directory repsonsible for storing all schedules jobs.
 - `/var/log/bitcoindca/`: Directory responsible for storing execution logs of this script, including all operations and their statuses.
-- `/etc/default/btcdca/`: Directory responsible for storing the Binance API secrets.
+- `/etc/default/bitcoindca/`: Directory responsible for storing the Binance API secrets.
     - __The secret file is stored with `600` permissions and is acessible only by the root user.__
-- `/usr/local/bin/dca_operation.py`: File responsible executing the buy order itself.
-    - It receives an argument (--amount or -A) passed from the cron configuration files located in `/etc/cron.d/`
-
 
 

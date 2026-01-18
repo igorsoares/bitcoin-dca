@@ -1,20 +1,22 @@
 #!/opt/bitcoind-dca/venv/bin/python
-from setup.domain.every_month_cron import EveryMonth
-from setup.domain.every_week_day_cron import EveryWeekDay
-from setup.config.crontab import create_crontab
-from setup.config.files_and_keys import *
+from schedule.domain.models.every_month_cron import EveryMonth
+from schedule.domain.models.every_week_day_cron import EveryWeekDay
+from schedule.configuration.crontab import create_crontab
+from schedule.configuration.files_and_keys import *
+from schedule.common import utils
 import sys
 
-def banner():
-    print("""
 
+def banner():
+    banner="""
 ██████╗ ██╗████████╗ ██████╗ ██████╗ ██╗███╗   ██╗    ██████╗  ██████╗ █████╗ 
 ██╔══██╗██║╚══██╔══╝██╔════╝██╔═══██╗██║████╗  ██║    ██╔══██╗██╔════╝██╔══██╗
 ██████╔╝██║   ██║   ██║     ██║   ██║██║██╔██╗ ██║    ██║  ██║██║     ███████║
 ██╔══██╗██║   ██║   ██║     ██║   ██║██║██║╚██╗██║    ██║  ██║██║     ██╔══██║
 ██████╔╝██║   ██║   ╚██████╗╚██████╔╝██║██║ ╚████║    ██████╔╝╚██████╗██║  ██║
 ╚═════╝ ╚═╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝    ╚═════╝  ╚═════╝╚═╝  ╚═╝
-""")
+"""
+    utils.print_green(banner)
 
 
 def monthly_build():
@@ -34,12 +36,12 @@ def menu():
     }
     
     print("""
-        1. Configure monthly buy
-        2. Configure weekly buy
-        0. Exit
+        [1] Configure monthly buy
+        [2] Configure weekly buy
+        [0] Exit
     """)
     try:
-        option = int(input("[BTC] Select: "))
+        option = int(input("Select: "))
         if option == 0:
             return
         
@@ -52,8 +54,8 @@ def menu():
 
         create_crontab(chose_action(), amount)
     except Exception as e:
-        print(f"Goodbye. {e}")
-
+        print("Invalid input. Goodbye.")
+        sys.exit(1)
 
 
 if __name__ == '__main__':

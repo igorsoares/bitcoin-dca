@@ -1,0 +1,13 @@
+binance:
+  generate-tokens-doc: https://www.binance.com/en/support/faq/detail/360002502072
+  base_url: https://api.binance.com
+  endpoints:
+    order: /api/v3/order
+    account: /api/v3/account
+
+config:
+  opt-directory: /opt/bitcoindca
+  logs-directory: /var/log/bitcoindca
+  crontab-file: /etc/cron.d/bitcoin
+  secrets-directory: /etc/default/bitcoindca
+  secrets-file: /etc/default/bitcoindca/secrets
