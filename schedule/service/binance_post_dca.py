@@ -34,12 +34,14 @@ class BinancePostDca(PostDcaProvider):
         return payload
 
     def _parse_order_response(self, resp: dict) -> dict:
+        total_commission = f"{sum(Decimal(trade['commission']) for trade in resp['fills']):.8f}"
         return {
             "symbol": resp["symbol"],
             "order_status": resp["status"],
             "order_id": resp["orderId"],
             "quote_qty": resp["cummulativeQuoteQty"],
             "btc_qty": resp["executedQty"],
+            "total_commission": total_commission
         }
 
     def _post_build_payload(
@@ -91,14 +93,13 @@ class BinancePostDca(PostDcaProvider):
             )
 
             if req.status_code == 200:
-                resp_as_json = req.json()
-
-                order_response = self._parse_order_response(resp_as_json)
+                order_response = self._parse_order_response(req.json())
 
                 log_message = f"""Market order filled at {symbol} successfully with status {order_response['order_status']}
         order id: {order_response['order_id']}
         quote_qty: {order_response['quote_qty']}
-        btc_qty: {order_response['btc_qty']}                
+        btc_qty: {order_response['btc_qty']} 
+        total_commission: {order_response['total_commission']}               
                 """
 
                 logging.info(log_message)
